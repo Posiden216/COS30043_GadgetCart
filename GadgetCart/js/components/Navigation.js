@@ -135,6 +135,19 @@
         }, 4000);
       };
 
+      // Watch for user login/logout and initialize cart
+      Vue.watch(user, async (newUser, oldUser) => {
+        if (newUser && !store.state.cartInitialized) {
+          await store.dispatch('initializeStore');
+        }
+      });
+
+      Vue.onMounted(async () => {
+        if (!store.state.cartInitialized) {
+          await store.dispatch('initializeStore');
+        }
+      });
+
       const maskedEmail = Vue.computed(() => {
         const email = user.value?.email || '';
         const [name, domain] = email.split('@');
@@ -147,6 +160,7 @@
           if (route.meta?.requiresAuth) {
             router.push('/login');
           }
+          showToast('You have been logged out', 'success');
         } catch (error) {
           console.error('Logout error:', error);
           showToast('Logout failed. Please try again.', 'danger');
@@ -159,7 +173,8 @@
         cartItemCount,
         maskedEmail,
         logout,
-        toast
+        toast,
+        showToast
       };
     }
   };

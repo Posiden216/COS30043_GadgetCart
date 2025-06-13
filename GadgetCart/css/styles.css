@@ -19,6 +19,12 @@ body {
   color: #2c3e50;
 }
 
+input::placeholder,
+textarea::placeholder {
+  color: #d3d3d3 !important;
+  opacity: 1;
+}
+
 /* =====================
    Navbar
 ===================== */
@@ -31,7 +37,7 @@ body {
 }
 
 /* =====================
-   Hero Banner
+   Hero Banner (Main Page)
 ===================== */
 .hero-banner {
   padding: 4rem 0;
@@ -59,7 +65,7 @@ body {
 }
 
 /* =====================
-   Perks Section
+   Perks Section (Main Page)
 ===================== */
 .perks-section {
   background-color: #ffffff;
@@ -81,30 +87,29 @@ body {
 }
 
 /* =====================
-   Product Cards
+   Product Cards (Main Page)
 ===================== */
 .product-card {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   border: 1px solid #dee2e6;
   border-radius: 0.75rem;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06); /* soft base shadow */
   background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
 .product-card:hover {
   transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25); /* darker and deeper shadow */
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
 
 .product-image {
   height: 220px;
   object-fit: cover;
   padding: 1rem;
-  border-bottom: 1px solid #dee2e6;
   background-color: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
   border-top-left-radius: 0.75rem;
   border-top-right-radius: 0.75rem;
 }
@@ -132,9 +137,8 @@ body {
   }
 }
 
-
 /* =====================
-   CTA Section
+   CTA Section (Main Page)
 ===================== */
 .cta-section {
   background-color: #e3eaf4; 
@@ -164,7 +168,7 @@ body {
 }
 
 /* =====================
-   Toasts
+   Toasts (Global)
 ===================== */
 .toast-container {
   max-width: 350px;
@@ -246,7 +250,7 @@ body {
 }
 
 /* =====================
-   Shopping Cart
+   Shopping Cart Page
 ===================== */
 .shopping-cart {
   min-height: 70vh;
@@ -267,6 +271,7 @@ body {
   letter-spacing: 0.5px;
 }
 
+/* Responsive cart layout */
 @media (max-width: 991.98px) {
   .cart-table thead {
     display: none;
@@ -304,8 +309,65 @@ body {
   }
 }
 
+/* Floating Checkout Summary */
+.floating-checkout {
+  position: sticky;
+  bottom: 30px;
+  max-width: 420px;
+  margin: 40px auto 0 auto;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(12px);
+  border-radius: 1rem;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+  padding: 1.5rem;
+  animation: floatIn 0.6s ease-out;
+  transition: transform 0.3s ease;
+}
+
+.floating-checkout:hover {
+  transform: scale(1.02);
+}
+
+@keyframes floatIn {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.order-summary-bottom {
+  background: #ffffffdd;
+  backdrop-filter: blur(8px);
+  margin-top: 40px;
+  border-radius: 1rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.order-summary-bottom:hover {
+  transform: scale(1.01);
+}
+
+.pulse {
+  animation: pulseBtn 2s infinite;
+}
+
+@keyframes pulseBtn {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(13, 110, 253, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(13, 110, 253, 0);
+  }
+}
+
 /* =====================
-   Footer
+   Footer (Global)
 ===================== */
 .site-footer {
   background-color: #f1f3f5;
@@ -331,14 +393,4 @@ body {
   .site-footer .row > div {
     text-align: center;
   }
-}
-
-
-/* =====================
-   Placeholder Styling
-===================== */
-input::placeholder,
-textarea::placeholder {
-  color: #d3d3d3 !important;
-  opacity: 1;
 }

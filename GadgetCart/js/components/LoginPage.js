@@ -136,39 +136,26 @@
         this.isLoading = true;
 
         try {
-          const response = await fetch('/IDD/GadgetCart/php/login.php', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              email: this.form.email,
-              password: this.form.password
-            })
+          const success = await this.$store.dispatch('login', {
+            email: this.form.email,
+            password: this.form.password
           });
 
-          const result = await response.json();
-
-          if (response.ok && result.success) {
-            this.$store.commit('SET_USER', result.user);
-
-            this.$store.commit('SET_NOTIFICATION', {
-              type: 'success',
-              message: `Welcome back, ${result.user.name}!`
-            });
-
+          if (success) {
             const redirect = this.$route?.query?.redirect || '/';
             this.$router.push(redirect);
           } else {
-            this.showToast(result.error || 'Invalid email or password', 'danger');
+            this.showToast('Invalid email or password.', 'danger');
           }
+
         } catch (error) {
           console.error('Login error:', error);
           this.showToast('Login failed. Please try again later.', 'danger');
         } finally {
           this.isLoading = false;
         }
-      },
+      }
+      ,
 
       validateForm() {
         let isValid = true;

@@ -3,7 +3,6 @@ window.GadgetCartComponents = window.GadgetCartComponents || {};
 window.GadgetCartComponents.MainPage = {
   template: `
     <div class="main-page">
-
       <!-- Toast Notification -->
       <div 
         v-if="toast.show" 
@@ -26,16 +25,10 @@ window.GadgetCartComponents.MainPage = {
             <div class="col-md-6">
               <h1 class="hero-title">Welcome to GadgetCart</h1>
               <p class="hero-subtitle">Discover the latest tech accessories at unbeatable prices</p>
-              <router-link to="/products" class="btn btn-primary btn-lg mt-2">
-                Shop Now
-              </router-link>
+              <router-link to="/products" class="btn btn-primary btn-lg mt-2">Shop Now</router-link>
             </div>
             <div class="col-md-6">
-              <img 
-                src="images/hero-devices.jpg" 
-                alt="Tech gadgets" 
-                class="img-fluid hero-image rounded shadow"
-              >
+              <img src="images/hero-devices.jpg" alt="Tech gadgets" class="img-fluid hero-image rounded shadow">
             </div>
           </div>
         </div>
@@ -82,23 +75,55 @@ window.GadgetCartComponents.MainPage = {
               v-for="product in topBestsellers"
               :key="product.id"
             >
-              <div class="product-card card h-100 border-0">
-                <img 
-                  :src="product.image" 
-                  :alt="product.name"
-                  class="card-img-top product-image rounded-top"
-                >
+              <div 
+                class="product-card card h-100 border-0 position-relative overflow-hidden"
+                @mouseenter="hovered = product.id"
+                @mouseleave="hovered = null"
+              >
+                <div class="position-relative">
+                  <img 
+                    :src="'/IDD/GadgetCart/' + product.image" 
+                    :alt="product.name"
+                    class="card-img-top product-image rounded-top"
+                  >
+
+                  <!-- Hover description overlay -->
+                  <transition name="fade">
+                    <div 
+                      v-if="hovered === product.id"
+                      class="position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-75 text-white d-flex align-items-center justify-content-center text-center px-3"
+                      style="z-index: 10; pointer-events: none;"
+                    >
+                      <p class="m-0">{{ product.description }}</p>
+                    </div>
+                  </transition>
+                </div>
+
                 <div class="card-body">
                   <h5 class="product-title">{{ product.name }}</h5>
                   <p class="product-price">{{ formatCurrency(product.price) }}</p>
                 </div>
-                <div class="card-footer bg-transparent">
-                  <button 
-                    @click="addToCart(product)"
-                    class="btn btn-sm btn-outline-primary w-100"
-                  >
-                    Add to Cart
-                  </button>
+
+                <div class="card-footer bg-transparent position-relative" style="z-index: 11;">
+                  <div v-if="!cartQuantities[product.id]">
+                    <button 
+                      @click="addToCart(product)"
+                      class="btn btn-sm btn-outline-primary w-100"
+                    >
+                      Add to Cart
+                    </button>
+                  </div>
+                  <div v-else class="d-flex align-items-center justify-content-between">
+                    <button 
+                      class="btn btn-sm btn-outline-secondary px-3"
+                      @click="decrementCart(product.id)"
+                    >−</button>
+                    <span class="mx-2">{{ cartQuantities[product.id] }}</span>
+                    <button 
+                      class="btn btn-sm btn-outline-primary px-3"
+                      @click="addToCart(product)"
+                    >+</button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -130,23 +155,18 @@ window.GadgetCartComponents.MainPage = {
       <footer class="site-footer">
         <div class="container">
           <div class="row">
-            <!-- Left column: About -->
             <div class="col-md-6 mb-3">
               <h5>About GadgetCart</h5>
               <p>
                 GadgetCart is your one-stop shop for the latest and greatest in tech accessories. We offer unbeatable prices, fast shipping, and top-rated customer service.
               </p>
             </div>
-
-            <!-- Right column: Contact or Additional Info -->
             <div class="col-md-6 mb-3">
               <h5>Contact</h5>
               <p>Email: support@gadgetcart.com</p>
               <p>Phone: +1 (800) 123-4567</p>
             </div>
           </div>
-
-          <!-- Bottom copyright -->
           <div class="text-center mt-4">
             <p class="mb-0">&copy; 2025 GadgetCart. All rights reserved.</p>
           </div>
@@ -162,16 +182,24 @@ window.GadgetCartComponents.MainPage = {
         message: '',
         type: 'danger'
       },
-      fetchError: false
+      fetchError: false,
+      hovered: null
     };
   },
 
   computed: {
     topBestsellers() {
       return [...this.$store.state.products]
-        .filter(p => p.sales !== undefined)
+        .filter(p => typeof p.sales === 'number')
         .sort((a, b) => b.sales - a.sales)
         .slice(0, 4);
+    },
+    cartQuantities() {
+      const quantities = {};
+      for (const item of this.$store.state.cart) {
+        quantities[item.id] = item.quantity;
+      }
+      return quantities;
     }
   },
 
@@ -201,15 +229,18 @@ window.GadgetCartComponents.MainPage = {
       }
     },
 
+    decrementCart(productId) {
+      this.$store.commit('DECREMENT_CART_ITEM', productId);
+    },
+
     formatCurrency(value) {
-      return '$' + parseFloat(value).toFixed(2);
+      return 'RM' + parseFloat(value).toFixed(2);
     },
 
     showToast(message, type = 'danger') {
       this.toast.message = message;
       this.toast.type = type;
       this.toast.show = true;
-
       setTimeout(() => {
         this.toast.show = false;
       }, 4000);

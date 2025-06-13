@@ -142,7 +142,13 @@ window.GadgetCartStore = Vuex.createStore({
 
     async fetchProducts({ commit }) {
       try {
-        const response = await fetch('/IDD/GadgetCart/data/products.json');
+        // store.js (or wherever you fetch products)
+        const basePath =
+          location.hostname === 'localhost'
+            ? '/IDD/GadgetCart'
+            : ''; // empty string for production
+
+        const response = await fetch(`${basePath}/data/products.json`);
         const products = await response.json();
         commit('SET_PRODUCTS', products);
       } catch (error) {

@@ -28,23 +28,29 @@ const router = createRouter({
 });
 
 // Route guard
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   const isAuthenticated = window.GadgetCartStore.state.user !== null;
+  
   if (to.meta.requiresAuth && !isAuthenticated) {
     next('/login');
   } else {
+    // Initialize store before proceeding with navigation
+    await window.GadgetCartStore.dispatch('initializeStore');
     next();
   }
 });
 
 // Create and mount app
 const app = createApp({
-  template: `
+  template:` 
     <div>
       <Navigation />
       <router-view></router-view>
-    </div>
-  `
+    </div>`
+  ,
+  async created() {
+    await this.$store.dispatch('initializeStore');
+  }
 });
 
 // Register global components

@@ -7,7 +7,7 @@ CREATE TABLE users (
   address TEXT,
   payment_method VARCHAR(50),
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+) ENGINE=InnoDB;
 
 -- PURCHASES table
 CREATE TABLE purchases (
@@ -17,7 +17,7 @@ CREATE TABLE purchases (
   total_spent DECIMAL(10, 2),
   purchase_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-);
+) ENGINE=InnoDB;
 
 -- PURCHASE_ITEMS table
 CREATE TABLE purchase_items (
@@ -29,5 +29,15 @@ CREATE TABLE purchase_items (
   price DECIMAL(10, 2),
   quantity INT,
   image TEXT,
-  FOREIGN KEY (purchase_id) REFERENCES purchases(id) ON DELETE CASCADE
-);
+  FOREIGN KEY (purchase_id) REFERENCES purchases(purchase_id) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+-- CART table
+CREATE TABLE cart (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  product_id INT NOT NULL,
+  quantity INT NOT NULL DEFAULT 1,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+) ENGINE=InnoDB;

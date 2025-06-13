@@ -54,26 +54,33 @@
             v-for="product in paginatedProducts"
             :key="product.id"
           >
-            <div class="card h-100 product-card">
-              <router-link 
-                :to="'/product/' + product.id" 
-                class="product-image-link"
-              >
+            <div 
+              class="card h-100 product-card position-relative overflow-hidden"
+              @mouseenter="hovered = product.id"
+              @mouseleave="hovered = null"
+            >
+              <!-- Static image container (not clickable) -->
+              <div class="product-image-link position-relative">
                 <img
                   :src="product.image"
                   :alt="product.name"
                   class="card-img-top product-image"
                 />
-              </router-link>
+
+                <!-- Hovered Description Overlay -->
+                <div 
+                  v-if="hovered === product.id"
+                  class="position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-75 text-white d-flex align-items-center justify-content-center text-center px-3"
+                  style="z-index: 2;"
+                >
+                  <p class="m-0">{{ product.description }}</p>
+                </div>
+              </div>
 
               <div class="card-body d-flex flex-column">
                 <h3 class="h5 mb-2">
-                  <router-link 
-                    :to="'/product/' + product.id"
-                    class="text-decoration-none"
-                  >
-                    {{ product.name }}
-                  </router-link>
+                  <!-- Product name (not clickable) -->
+                  <span class="text-dark">{{ product.name }}</span>
                 </h3>
 
                 <div class="d-flex justify-content-between align-items-center mt-auto">
@@ -151,7 +158,8 @@
         categoryFilter: '',
         sortOption: 'name-asc',
         currentPage: 1,
-        itemsPerPage: 6
+        itemsPerPage: 6,
+        hovered: null
       };
     },
 
@@ -218,12 +226,21 @@
       },
 
       removeFromCart(product) {
-        this.$store.commit('REMOVE_FROM_CART', product.id);
+        const cartItem = this.$store.state.cart.find(item => item.id === product.id);
 
-        this.$store.commit('SET_NOTIFICATION', {
-          type: 'info',
-          message: `${product.name} removed from cart`
-        });
+        if (cartItem && cartItem.quantity > 1) {
+          this.$store.commit('DECREMENT_CART_ITEM', product.id);
+          this.$store.commit('SET_NOTIFICATION', {
+            type: 'info',
+            message: `Reduced quantity of ${product.name}`
+          });
+        } else {
+          this.$store.commit('REMOVE_FROM_CART', product.id);
+          this.$store.commit('SET_NOTIFICATION', {
+            type: 'info',
+            message: `${product.name} removed from cart`
+          });
+        }
       },
 
       getProductQuantity(productId) {
