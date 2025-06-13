@@ -1,0 +1,182 @@
+[
+  {
+    "id": 1,
+    "name": "Wireless Earbuds",
+    "price": 59.99,
+    "category": "Audio",
+    "image": "images/earbuds.jpg",
+    "description": "Comfortable noise-cancelling earbuds with 20-hour battery life, ideal for daily commutes or workouts.",
+    "sales": 340
+  },
+  {
+    "id": 2,
+    "name": "Bluetooth Speaker",
+    "price": 89.99,
+    "category": "Audio",
+    "image": "images/speaker.WEBP",
+    "description": "Compact yet powerful speaker with 360° sound, deep bass, and waterproof design for outdoor use.",
+    "sales": 280
+  },
+  {
+    "id": 3,
+    "name": "Vivo",
+    "price": 699.99,
+    "category": "Mobile",
+    "image": "images/phone.WEBP",
+    "description": "6.5-inch OLED display, 128GB storage, triple camera setup, and blazing-fast 5G connectivity.",
+    "sales": 220
+  },
+  {
+    "id": 4,
+    "name": "Wireless Charger Pad",
+    "price": 29.99,
+    "category": "Accessories",
+    "image": "images/charger.AVIF",
+    "description": "Fast-charging wireless pad compatible with all Qi-enabled devices, featuring a sleek and compact design.",
+    "sales": 310
+  },
+  {
+    "id": 5,
+    "name": "Gigabyte G5",
+    "price": 1299.99,
+    "category": "Laptops",
+    "image": "images/laptop.jpg",
+    "description": "High-performance laptop with Intel i7 processor, 16GB RAM, and NVIDIA RTX 3060 graphics for gaming and work.",
+    "sales": 190
+  },
+  {
+    "id": 6,
+    "name": "DSLR Camera Pro 500",
+    "price": 999.99,
+    "category": "Cameras",
+    "image": "images/camera.jpg",
+    "description": "Capture professional-quality photos with 24MP resolution, 4K video recording, and built-in Wi-Fi.",
+    "sales": 150
+  },
+  {
+    "id": 7,
+    "name": "Smartwatch Alpha",
+    "price": 199.99,
+    "category": "Wearables",
+    "image": "images/smartwatch.WEBP",
+    "description": "Track your fitness with GPS, heart rate monitoring, and enjoy a 7-day battery life in a stylish design.",
+    "sales": 275
+  },
+  {
+    "id": 8,
+    "name": "Portable SSD 1TB",
+    "price": 149.99,
+    "category": "Storage",
+    "image": "images/ssd.WEBP",
+    "description": "Fast USB-C 1TB SSD for quick data transfers, secure storage, and portability during travel or work.",
+    "sales": 260
+  },
+  {
+    "id": 9,
+    "name": "Noise Cancelling Headphones",
+    "price": 249.99,
+    "category": "Audio",
+    "image": "images/headphones.jpg",
+    "description": "Premium over-ear headphones with rich sound, active noise cancellation, and all-day comfort.",
+    "sales": 330
+  },
+  {
+    "id": 10,
+    "name": "4K Monitor 27\"",
+    "price": 379.99,
+    "category": "Monitors",
+    "image": "images/monitor.jpg",
+    "description": "Stunning Ultra HD display with HDR support and wide color gamut, perfect for creatives and gamers.",
+    "sales": 140
+  },
+  {
+    "id": 11,
+    "name": "Mechanical Gaming Keyboard",
+    "price": 109.99,
+    "category": "Accessories",
+    "image": "images/keyboard.jpg",
+    "description": "Tactile mechanical keyboard with RGB lighting, blue switches, and customizable macros.",
+    "sales": 305
+  },
+  {
+    "id": 12,
+    "name": "Wireless Mouse",
+    "price": 49.99,
+    "category": "Accessories",
+    "image": "images/mouse.WEBP",
+    "description": "Ergonomic and rechargeable mouse with precision tracking and side buttons for productivity.",
+    "sales": 295
+  },
+  {
+    "id": 13,
+    "name": "Smart Home Hub",
+    "price": 129.99,
+    "category": "Smart Home",
+    "image": "images/hub.jpg",
+    "description": "Control all your smart home devices from one place with voice assistant and app support.",
+    "sales": 170
+  },
+  {
+    "id": 14,
+    "name": "Fitness Tracker Band",
+    "price": 59.99,
+    "category": "Wearables",
+    "image": "images/fitness.WEBP",
+    "description": "Lightweight tracker with step counting, sleep analysis, and waterproof construction for active lifestyles.",
+    "sales": 225
+  },
+  {
+    "id": 15,
+    "name": "Tablet Pro 11\"",
+    "price": 499.99,
+    "category": "Tablets",
+    "image": "images/tablet.jpg",
+    "description": "Powerful 11-inch tablet with high-resolution display, stylus support, and smooth multitasking.",
+    "sales": 185
+  },
+  {
+    "id": 16,
+    "name": "Action Camera HD",
+    "price": 199.99,
+    "category": "Cameras",
+    "image": "images/actioncam.jpg",
+    "description": "Durable HD action camera with waterproof housing, mounts, and crisp 1080p video recording.",
+    "sales": 160
+  },
+  {
+    "id": 17,
+    "name": "Noise-Isolating Earphones",
+    "price": 39.99,
+    "category": "Audio",
+    "image": "images/earphones.jpg",
+    "description": "In-ear earphones with tangle-free cord, noise isolation, and built-in microphone for calls.",
+    "sales": 275
+  },
+  {
+    "id": 18,
+    "name": "Streaming Microphone",
+    "price": 89.99,
+    "category": "Audio",
+    "image": "images/mic.jpg",
+    "description": "Studio-grade USB condenser mic ideal for streaming, podcasting, and high-quality voice calls.",
+    "sales": 165
+  },
+  {
+    "id": 19,
+    "name": "VR Headset",
+    "price": 349.99,
+    "category": "Gaming",
+    "image": "images/vr.WEBP",
+    "description": "Immersive VR headset with motion tracking, high-res displays, and wide compatibility with games.",
+    "sales": 210
+  },
+  {
+    "id": 20,
+    "name": "Laptop Stand",
+    "price": 24.99,
+    "category": "Accessories",
+    "image": "images/stand.WEBP",
+    "description": "Adjustable aluminum stand that improves airflow and posture while working on laptops.",
+    "sales": 300
+  }
+]
